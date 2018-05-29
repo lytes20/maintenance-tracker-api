@@ -23,5 +23,7 @@ class TestRun(TestCase):
             reply = json.loads(response.data.decode())
             self.assertEquals(reply["message"], "success")
     
-    def test_edit_request(self):
-        pass
+    # def test_edit_request(self):
+    #     with self.client.put("/users/requests/10", content_type='application/json', headers=headers, data=json.dumps(dict(title="something", desc="hasaja")))
+    #     reply = json.loads(response.data)
+    #     self.assertEquals(reply["message"], "Request Edited")
