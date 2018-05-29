@@ -5,8 +5,6 @@ from flask_testing import TestCase
 from run import app
 import json
 
-
-
 class TestRun(TestCase):
 
     def create_app(self):
@@ -18,3 +16,9 @@ class TestRun(TestCase):
                                         data=json.dumps(dict(title="something", desc="hasaja")))            
             reply = json.loads(response.data.decode())
             self.assertEquals(reply["message"], "sucessfully created request")
+
+    def test_fetch_requests(self):
+        pass
+    
+    def test_edit_request(self):
+        pass
