@@ -12,14 +12,14 @@ class TestRun(TestCase):
 
     def test_create_request(self):
         with self.client:
-            response = self.client.post("/", content_type='application/json',
+            response = self.client.post("/users/requests", content_type='application/json',
                                         data=json.dumps(dict(title="something", desc="hasaja")))            
             reply = json.loads(response.data.decode())
             self.assertEquals(reply["message"], "sucessfully created request")
 
     def test_fetch_requests(self):
         with self.client:
-            response = self.client.get("/")
+            response = self.client.get("/users/requests")
             reply = json.loads(response.data.decode())
             self.assertEquals(reply["message"], "success")
     
