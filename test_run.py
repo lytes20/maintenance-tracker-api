@@ -18,7 +18,10 @@ class TestRun(TestCase):
             self.assertEquals(reply["message"], "sucessfully created request")
 
     def test_fetch_requests(self):
-        pass
+        with self.client:
+            response = self.client.get("/")
+            reply = json.loads(response.data.decode())
+            self.assertEquals(reply["message"], "success")
     
     def test_edit_request(self):
         pass
