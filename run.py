@@ -57,11 +57,7 @@ def fetch_requests():
         })
     
     #if user has just one request
-<<<<<<< HEAD
-    if number_of_requests  == 1:
-=======
     if len(all_requests) == 1:
->>>>>>> tests
         return jsonify({
             "message":"Successfully fetched request",
             "requests":[
@@ -69,53 +65,5 @@ def fetch_requests():
             ]
         })
 
-<<<<<<< HEAD
-    # for i in range(len(all_requests)):
-    #     all_requests[i]
-
-    # if number_of_requests > 1:
-    #     return jsonify({
-    #         "message":"You have not made any requests yet",
-    #         "requests":[
-    #             {
-    #                 'request_title':all_requests[0].title,
-    #                 "request_description":all_requests[0].description,
-    #                 "requester_name" : all_requests[0].requester_name,
-    #                 "request_id" : all_requests[0].request_id
-    #             }
-    #         ]
-    #     })
-
-@app.route("/users/requests/<requestid>", methods=["GET"])
-def fetch_a_request(requestid):
-    """ Function to fetch a single user request"""
-
-    number_of_requests = len(all_requests)    
-    #check if user has any requests
-    if number_of_requests < 1:
-        return jsonify({
-            "message":"You have not made any requests yet"
-        })
-
-    #if user has requests
-    for a_request in all_requests:
-        if a_request.request_id == requestid:
-            return jsonify({
-                "message":"You have not made any requests yet",
-                "request":[
-                    {
-                        'request_title':a_request.title,
-                        "request_description":a_request.description,
-                        "requester_name" :a_request.requester_name,
-                        "request_id" :a_request.request_id
-                    }
-                ]
-            })
-        return jsonify({"message":"Request not found"})
-    
-  
-
-=======
->>>>>>> tests
 if __name__ == "__main__":
     app.run(debug = True)
