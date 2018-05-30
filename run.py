@@ -37,7 +37,13 @@ def create_request():
     all_requests.append(new_request)
     # new_number_of_requests = len(all_requests)
 
-    return jsonify({"message":"sucessfully created request", "user_request": all_requests})
+    return jsonify({
+        "message":"sucessfully created request",
+        'request_title':new_request.title,
+        "request_description":new_request.description,
+        "requester_name" : new_request.requester_name,
+        "request_id" : new_request.request_id
+        })
 
 @app.route("/users/requests", methods=["GET"])
 def fetch_requests():
