@@ -3,7 +3,7 @@ File that has the api core functionality
 """
 from flask import Flask, jsonify, request
 from models import MaintenanceRequest, User
-import random
+import random, json
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ all_requests = []
 
 @app.route("/users/requests", methods=["POST"])
 def create_request():
-    """ Function to get the request data entered by the user """
+    """ Endpoint to get the request data entered by the user """
     #get entered data
     data = request.get_json()
 
@@ -20,7 +20,7 @@ def create_request():
     req_title = data.get("request_title")
     req_desc = data.get("request_description")
     requester_name = "Gideon"
-    req_id = random.randint(1, 3000)
+    req_id = len(all_requests) +1  # + random.randint(1, 3000)
 
     #validation
     if not req_title:
@@ -47,29 +47,29 @@ def create_request():
 
 @app.route("/users/requests", methods=["GET"])
 def fetch_requests():
-    """ Function to fetch saved user requests """
+    """ Endpoint to fetch saved user requests """
 
     number_of_requests = len(all_requests)
     #check if user has any requests
-    if number_of_requests < 1:
+    if len(all_requests) < 1:
         return jsonify({
             "message":"You have not made any requests yet"
         })
     
     #if user has just one request
+<<<<<<< HEAD
     if number_of_requests  == 1:
+=======
+    if len(all_requests) == 1:
+>>>>>>> tests
         return jsonify({
-            "message":"You have not made any requests yet",
+            "message":"Successfully fetched request",
             "requests":[
-                {
-                    'request_title':all_requests[0].title,
-                    "request_description":all_requests[0].description,
-                    "requester_name" : all_requests[0].requester_name,
-                    "request_id" : all_requests[0].request_id
-                }
+                json.dumps(a_request.__dict__) for a_request in all_requests
             ]
         })
 
+<<<<<<< HEAD
     # for i in range(len(all_requests)):
     #     all_requests[i]
 
@@ -115,5 +115,7 @@ def fetch_a_request(requestid):
     
   
 
+=======
+>>>>>>> tests
 if __name__ == "__main__":
     app.run(debug = True)
