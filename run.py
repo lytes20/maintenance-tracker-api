@@ -12,8 +12,8 @@ Users = []
 #---------------------------------------------------------------------------------------------------------
 # Start of End points for user authentication
 
-@app.route("/<version>/user/register", methods=["POST"])
-def register(version):
+@app.route("/<v1>/user/register", methods=["POST"])
+def register(v1):
     """End point to register a new user"""
     data = request.get_json()
     username = data.get("username")
@@ -31,13 +31,28 @@ def register(version):
     Users.append(new_user)
     return jsonify({'message':'sucessfully registered'}), 201
 
+
+@app.route("/<v1>/user/login", methods=["POST"])
+def login(v1):
+    post_data = request.get_json()
+    email = post_data.get("email")
+    password = post_data.get("password")
+    
+
+    if not email:
+        return jsonify({"message": "Missing email parameter"}), 400
+    if not password:
+        return jsonify({"message": "Missing password parameter"}), 400
+
+    return jsonify({"message": "sucessfully logged in"}), 200
+
 #End of user authentication end points
 #---------------------------------------------------------------------------------------------------------
 
 
 #Start of the priority end points
-@app.route("/<version>/users/requests", methods=["POST"])
-def create_request(version):
+@app.route("/<v1>/users/requests", methods=["POST"])
+def create_request(v1):
     """ Endpoint to get the request data entered by the user """
     #get entered data
     data = request.get_json()
@@ -71,8 +86,8 @@ def create_request(version):
         "request_id" : new_request.request_id
         })
 
-@app.route("/<version>/users/requests", methods=["GET"])
-def fetch_requests(version):
+@app.route("/<v1>/users/requests", methods=["GET"])
+def fetch_requests(v1):
     """ Endpoint to fetch saved user requests """
     
     #check if user has any requests
@@ -90,8 +105,8 @@ def fetch_requests(version):
             ]
         })
 
-@app.route("/<version>/users/requests/<requestid>", methods=["GET"])
-def fetch_a_request(version, requestid):
+@app.route("/<v1>/users/requests/<requestid>", methods=["GET"])
+def fetch_a_request(v1, requestid):
     """ Endpoint to fetch a single user requests """
 
     #check if user has any requests
@@ -108,8 +123,8 @@ def fetch_a_request(version, requestid):
             "request": returned_request[0]
         })
 
-@app.route("/<version>/users/requests/<requestid>", methods=["PUT"])
-def edit_a_request(version, requestid):
+@app.route("/<v1>/users/requests/<requestid>", methods=["PUT"])
+def edit_a_request(v1, requestid):
     """ Endpoint to edit a user requests """
 
     #check if user has any requests
