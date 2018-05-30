@@ -82,5 +82,33 @@ def fetch_a_request(requestid):
             "request": returned_request[0]
         })
 
+@app.route("/users/requests/<requestid>", methods=["PUT"])
+def edit_a_request(requestid):
+    """ Endpoint to edit a user requests """
+
+    #check if user has any requests
+    if len(all_requests) < 1:
+        return jsonify({
+            "message":"You have not made any requests yet"
+        })
+    
+    #if user has more than one request
+    if len(all_requests) > 1:
+        #get entered data
+        data = request.get_json()
+
+        #picking the request attributes
+        req_title = data.get("request_title")
+        req_desc = data.get("request_description")
+
+        returned_request = [a_request for a_request in all_requests if a_request.request_id == requestid]
+        returned_request[0].title = req_title
+        returned_request[0].description = req_desc
+
+        return jsonify({
+            "message":"Successfully fetched the request",
+            "request": returned_request[0]
+        })
+
 if __name__ == "__main__":
     app.run(debug = True)
