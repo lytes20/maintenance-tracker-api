@@ -1,5 +1,6 @@
 from flask_testing import TestCase
 from run import app
+from models import User
 
 
 class UserModelTest(TestCase):
@@ -11,5 +12,5 @@ class UserModelTest(TestCase):
         """ Function to test that a user is created from the user model"""
         user = User("Gideon Bamuleseyo", "gideon@mail.com", "secret")
         self.assertEqual(user.name, "Gideon Bamuleseyo")
-        self.assertEqual(user.email, "123")
-        self.assertEqual(user.password, "gideon@mail.com")
+        self.assertEqual(user.email, "gideon@mail.com")
+        self.assertEqual(user.password, "secret")
