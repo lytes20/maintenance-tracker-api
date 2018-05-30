@@ -55,13 +55,31 @@ def fetch_requests():
             "message":"You have not made any requests yet"
         })
     
-    #if user has just one request
-    if len(all_requests) == 1:
+    #if user has more than one request
+    if len(all_requests) > 1:
         return jsonify({
             "message":"Successfully fetched request",
             "requests":[
                 json.dumps(a_request.__dict__) for a_request in all_requests
             ]
+        })
+
+@app.route("/users/requests/<requestid>", methods=["GET"])
+def fetch_a_request(requestid):
+    """ Endpoint to fetch a single user requests """
+
+    #check if user has any requests
+    if len(all_requests) < 1:
+        return jsonify({
+            "message":"You have not made any requests yet"
+        })
+    
+    #if user has more than one request
+    if len(all_requests) > 1:
+        returned_request = [a_request for a_request in all_requests if a_request.request_id == requestid]
+        return jsonify({
+            "message":"Successfully fetched the request",
+            "request": returned_request[0]
         })
 
 if __name__ == "__main__":
