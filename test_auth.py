@@ -12,7 +12,7 @@ class UserAuthTest(TestCase):
         """ Test for successful user login """
         with self.client:
             response = self.client.post(
-                "/user/register",
+                "1/user/register",
                 content_type='application/json',
                 data=json.dumps(dict(username="Gideon B", email="email@email.com", password="secret"))
                 )            

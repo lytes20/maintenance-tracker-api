@@ -12,8 +12,8 @@ Users = []
 #---------------------------------------------------------------------------------------------------------
 # Start of End points for user authentication
 
-@app.route("/user/register", methods=["POST"])
-def register():
+@app.route("/<version>/user/register", methods=["POST"])
+def register(version):
     """End point to register a new user"""
     data = request.get_json()
     username = data.get("username")
@@ -36,8 +36,8 @@ def register():
 
 
 #Start of the priority end points
-@app.route("/users/requests", methods=["POST"])
-def create_request():
+@app.route("/<version>/users/requests", methods=["POST"])
+def create_request(version):
     """ Endpoint to get the request data entered by the user """
     #get entered data
     data = request.get_json()
@@ -71,11 +71,10 @@ def create_request():
         "request_id" : new_request.request_id
         })
 
-@app.route("/users/requests", methods=["GET"])
-def fetch_requests():
+@app.route("/<version>/users/requests", methods=["GET"])
+def fetch_requests(version):
     """ Endpoint to fetch saved user requests """
-
-    number_of_requests = len(all_requests)
+    
     #check if user has any requests
     if len(all_requests) < 1:
         return jsonify({
@@ -91,8 +90,8 @@ def fetch_requests():
             ]
         })
 
-@app.route("/users/requests/<requestid>", methods=["GET"])
-def fetch_a_request(requestid):
+@app.route("/<version>/users/requests/<requestid>", methods=["GET"])
+def fetch_a_request(version, requestid):
     """ Endpoint to fetch a single user requests """
 
     #check if user has any requests
@@ -109,8 +108,8 @@ def fetch_a_request(requestid):
             "request": returned_request[0]
         })
 
-@app.route("/users/requests/<requestid>", methods=["PUT"])
-def edit_a_request(requestid):
+@app.route("/<version>/users/requests/<requestid>", methods=["PUT"])
+def edit_a_request(version, requestid):
     """ Endpoint to edit a user requests """
 
     #check if user has any requests
