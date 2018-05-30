@@ -8,8 +8,34 @@ import random, json
 app = Flask(__name__)
 
 all_requests = []
+Users = []
+#---------------------------------------------------------------------------------------------------------
+# Start of End points for user authentication
+
+@app.route("/user/register", methods=["POST"])
+def register():
+    """End point to register a new user"""
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+    email = data.get("email")
+
+    if not username:
+        return jsonify({"message": "Missing username parameter"}), 400
+    if not password:
+        return jsonify({"message": "Missing password parameter"}), 400
+    if not email:
+        return jsonify({"message": "Missing email parameter"}), 400
+   
+    new_user = User(username, password, email)
+    Users.append(new_user)
+    return jsonify({'message':'sucessfully registered'}), 201
+
+#End of user authentication end points
+#---------------------------------------------------------------------------------------------------------
 
 
+#Start of the priority end points
 @app.route("/users/requests", methods=["POST"])
 def create_request():
     """ Endpoint to get the request data entered by the user """

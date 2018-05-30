@@ -14,7 +14,7 @@ class UserAuthTest(TestCase):
             response = self.client.post(
                 "/user/register",
                 content_type='application/json',
-                data=json.dumps(dict(name="Gideon B", email="email@email.com", password="secret"))
+                data=json.dumps(dict(username="Gideon B", email="email@email.com", password="secret"))
                 )            
             reply = json.loads(response.data)
             self.assertEquals(reply["message"], "successfully registered")
