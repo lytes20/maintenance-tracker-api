@@ -47,7 +47,40 @@ def create_request():
 
 @app.route("/users/requests", methods=["GET"])
 def fetch_requests():
-    return jsonify({"message":"success"})
+    """ Function to fetch saved user requests """
+
+    #check if user has any requests
+    if number_of_requests < 1:
+        return jsonify({
+            "message":"You have not made any requests yet"
+        })
+    
+    #if user has just one request
+    if number_of_requests == 1:
+        return jsonify({
+            "message":"You have not made any requests yet",
+            "requests":[
+                {
+                    'request_title':all_requests[0].title,
+                    "request_description":all_requests[0].description,
+                    "requester_name" : all_requests[0].requester_name,
+                    "request_id" : all_requests[0].request_id
+                }
+            ]
+        })
+
+    # if number_of_requests > 1:
+    #     return jsonify({
+    #         "message":"You have not made any requests yet",
+    #         "requests":[
+    #             {
+    #                 'request_title':all_requests[0].title,
+    #                 "request_description":all_requests[0].description,
+    #                 "requester_name" : all_requests[0].requester_name,
+    #                 "request_id" : all_requests[0].request_id
+    #             }
+    #         ]
+    #     })
 
 if __name__ == "__main__":
     app.run(debug = True)
