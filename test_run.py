@@ -21,18 +21,21 @@ class TestRun(TestCase):
                                         )            
             reply = json.loads(response.data.decode())
             self.assertEquals(reply["message"], "sucessfully created request")
+            self.assertEquals(response.status_code, 200)
 
     def test_fetch_requests(self):
         with self.client:
             response = self.client.get("/1/users/requests")
             reply = json.loads(response.data.decode())
             self.assertEquals(reply["message"], "Successfully fetched requests")
+            self.assertEquals(response.status_code, 200)
 
     def test_fetch_a_request(self):
         with self.client:
             response = self.client.get("/1/users/requests/1")
             reply = json.loads(response.data.decode())
             self.assertEquals(reply["message"], "Successfully fetched the request")
+            self.assertEquals(response.status_code, 200)
     
     def test_edit_request(self):
         with self.client:
@@ -45,3 +48,4 @@ class TestRun(TestCase):
                     )
         reply = json.loads(response.data)
         self.assertEquals(reply["message"], "Successfully edited the request")
+        self.assertEquals(response.status_code, 200)

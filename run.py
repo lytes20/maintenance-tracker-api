@@ -29,7 +29,7 @@ def register(v1):
    
     new_user = User(username, password, email)
     Users.append(new_user)
-    return jsonify({'message':'sucessfully registered'}), 201
+    return jsonify({'message':'successfully registered'}), 201
 
 
 @app.route("/<v1>/user/login", methods=["POST"])
@@ -44,7 +44,7 @@ def login(v1):
     if not password:
         return jsonify({"message": "Missing password parameter"}), 400
 
-    return jsonify({"message": "sucessfully logged in"}), 200
+    return jsonify({"message": "successfully logged in"}), 200
 
 #End of user authentication end points
 #---------------------------------------------------------------------------------------------------------
