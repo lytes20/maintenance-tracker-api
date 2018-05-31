@@ -97,13 +97,14 @@ def fetch_requests(v1):
         })
     
     #if user has more than one request
-    if len(all_requests) > 1:
+    if len(all_requests) >= 1:
         return jsonify({
-            "message":"Successfully fetched request",
+            "message":"Successfully fetched requests",
             "requests":[
                 json.dumps(a_request.__dict__) for a_request in all_requests
             ]
         })
+    return jsonify({"message":"Can not fetch requests now"})
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["GET"])
 def fetch_a_request(v1, requestid):
@@ -116,11 +117,19 @@ def fetch_a_request(v1, requestid):
         })
     
     #if user has more than one request
-    if len(all_requests) > 1:
-        returned_request = [a_request for a_request in all_requests if a_request.request_id == requestid]
+    if len(all_requests) >= 1:
+        returned_request = []
+        for a_request in all_requests:
+            if a_request.request_id == int(requestid):
+                returned_request.append(a_request)
+        print("#----------------------------------------#")
+        print("#----------------------------------------#")
+        print (returned_request)
+        print("#----------------------------------------#")
+        print("#----------------------------------------#")
         return jsonify({
             "message":"Successfully fetched the request",
-            "request": returned_request[0]
+            "request": json.dumps(returned_request[0].__dict__)
         })
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["PUT"])
@@ -134,7 +143,7 @@ def edit_a_request(v1, requestid):
         })
     
     #if user has more than one request
-    if len(all_requests) > 1:
+    if len(all_requests) >= 1:
         #get entered data
         data = request.get_json()
 
@@ -142,14 +151,19 @@ def edit_a_request(v1, requestid):
         req_title = data.get("request_title")
         req_desc = data.get("request_description")
 
-        returned_request = [a_request for a_request in all_requests if a_request.request_id == requestid]
-        returned_request[0].title = req_title
-        returned_request[0].description = req_desc
+        if len(all_requests) >= 1:
+            for a_request in all_requests:
+                if a_request.request_id == int(requestid):
+                    a_request.title = req_title
+                    a_request.description = req_desc
 
-        return jsonify({
-            "message":"Successfully fetched the request",
-            "request": returned_request[0]
-        })
+                    return jsonify({
+                        "message":"Successfully edited the request",
+                        "request": json.dumps(a_request.__dict__)
+                    })
+
+
+        
 
 if __name__ == "__main__":
     app.run(debug = True)

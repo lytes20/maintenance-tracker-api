@@ -1,4 +1,5 @@
 # maintenance-tracker-api
+[![Build Status](https://travis-ci.org/lytes20/maintenance-tracker-api.svg?branch=master)](https://travis-ci.org/lytes20/maintenance-tracker-api)
 ## About
 This is an API for a maintenance tracker application that allows users to make maintenance or repair requests and monitor them
 ## Features
