@@ -101,7 +101,7 @@ def fetch_requests(v1):
         return jsonify({
             "message":"Successfully fetched requests",
             "requests":[
-                json.dumps(a_request.__dict__) for a_request in all_requests
+                a_request.__dict__ for a_request in all_requests
             ]
         })
     return jsonify({"message":"Can not fetch requests now"})
@@ -129,7 +129,7 @@ def fetch_a_request(v1, requestid):
         print("#----------------------------------------#")
         return jsonify({
             "message":"Successfully fetched the request",
-            "request": json.dumps(returned_request[0].__dict__)
+            "request": returned_request[0].__dict__
         })
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["PUT"])
@@ -159,7 +159,7 @@ def edit_a_request(v1, requestid):
 
                     return jsonify({
                         "message":"Successfully edited the request",
-                        "request": json.dumps(a_request.__dict__)
+                        "request": a_request.__dict__
                     })
 
 
