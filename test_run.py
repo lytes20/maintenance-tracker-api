@@ -28,13 +28,20 @@ class TestRun(TestCase):
             reply = json.loads(response.data.decode())
             self.assertEquals(reply["message"], "Successfully fetched requests")
 
-    # def test_fetch_a_request(self):
-    #     with self.client:
-    #         response = self.client.get("/users/requests<requestid>")
-    #         reply = json.loads(response.data.decode())
-    #         self.assertEquals(reply["message"], "success")
+    def test_fetch_a_request(self):
+        with self.client:
+            response = self.client.get("/1/users/requests/1")
+            reply = json.loads(response.data.decode())
+            self.assertEquals(reply["message"], "Successfully fetched the request")
     
-    # def test_edit_request(self):
-    #     with self.client.put("/users/requests/10", content_type='application/json', headers=headers, data=json.dumps(dict(title="something", desc="hasaja")))
-    #     reply = json.loads(response.data)
-    #     self.assertEquals(reply["message"], "Request Edited")
+    def test_edit_request(self):
+        with self.client:
+            response = self.client.put(
+                "/1/users/requests/1",
+                content_type='application/json',
+                data=json.dumps(dict(
+                    request_title="Fix Car",
+                    request_description="iphone screen needs fixing"))
+                    )
+        reply = json.loads(response.data)
+        self.assertEquals(reply["message"], "Successfully edited the request")
