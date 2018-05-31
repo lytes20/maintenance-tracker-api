@@ -97,7 +97,7 @@ def fetch_requests(v1):
         })
     
     #if user has more than one request
-    if len(all_requests) > 1:
+    if len(all_requests) >= 1:
         return jsonify({
             "message":"Successfully fetched requests",
             "requests":[
@@ -116,7 +116,7 @@ def fetch_a_request(v1, requestid):
         })
     
     #if user has more than one request
-    if len(all_requests) > 1:
+    if len(all_requests) >= 1:
         returned_request = []
         for a_request in all_requests:
             if a_request.request_id == int(requestid):
@@ -142,7 +142,7 @@ def edit_a_request(v1, requestid):
         })
     
     #if user has more than one request
-    if len(all_requests) > 1:
+    if len(all_requests) >= 1:
         #get entered data
         data = request.get_json()
 
@@ -150,7 +150,7 @@ def edit_a_request(v1, requestid):
         req_title = data.get("request_title")
         req_desc = data.get("request_description")
 
-        if len(all_requests) > 1:
+        if len(all_requests) >= 1:
             for a_request in all_requests:
                 if a_request.request_id == int(requestid):
                     a_request.title = req_title
