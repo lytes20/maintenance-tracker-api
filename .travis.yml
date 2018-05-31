@@ -6,4 +6,4 @@ install:
   - pip install -r requirements.txt
 
 script:
-  - pytest --with-coverage test_run.py
+  - pytest test_run.py
