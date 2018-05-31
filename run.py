@@ -104,6 +104,7 @@ def fetch_requests(v1):
                 json.dumps(a_request.__dict__) for a_request in all_requests
             ]
         })
+    return jsonify({"message":"Can not fetch requests now"})
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["GET"])
 def fetch_a_request(v1, requestid):
