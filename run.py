@@ -117,10 +117,18 @@ def fetch_a_request(v1, requestid):
     
     #if user has more than one request
     if len(all_requests) > 1:
-        returned_request = [a_request for a_request in all_requests if a_request.request_id == requestid]
+        returned_request = []
+        for a_request in all_requests:
+            if a_request.request_id == int(requestid):
+                returned_request.append(a_request)
+        print("#----------------------------------------#")
+        print("#----------------------------------------#")
+        print (returned_request)
+        print("#----------------------------------------#")
+        print("#----------------------------------------#")
         return jsonify({
             "message":"Successfully fetched the request",
-            "request": returned_request[0]
+            "request": json.dumps(returned_request[0].__dict__)
         })
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["PUT"])
