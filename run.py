@@ -29,7 +29,7 @@ def register(v1):
    
     new_user = User(username, password, email)
     Users.append(new_user)
-    return jsonify({'message':'sucessfully registered'}), 201
+    return jsonify({'message':'successfully registered'}), 201
 
 
 @app.route("/<v1>/user/login", methods=["POST"])
@@ -44,7 +44,7 @@ def login(v1):
     if not password:
         return jsonify({"message": "Missing password parameter"}), 400
 
-    return jsonify({"message": "sucessfully logged in"}), 200
+    return jsonify({"message": "successfully logged in"}), 200
 
 #End of user authentication end points
 #---------------------------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ def fetch_requests(v1):
         return jsonify({
             "message":"Successfully fetched requests",
             "requests":[
-                json.dumps(a_request.__dict__) for a_request in all_requests
+                a_request.__dict__ for a_request in all_requests
             ]
         })
     return jsonify({"message":"Can not fetch requests now"})
@@ -122,15 +122,14 @@ def fetch_a_request(v1, requestid):
         for a_request in all_requests:
             if a_request.request_id == int(requestid):
                 returned_request.append(a_request)
-        print("#----------------------------------------#")
-        print("#----------------------------------------#")
-        print (returned_request)
-        print("#----------------------------------------#")
-        print("#----------------------------------------#")
-        return jsonify({
-            "message":"Successfully fetched the request",
-            "request": json.dumps(returned_request[0].__dict__)
-        })
+                return jsonify({
+                    "message": "Successfully fetched the request",
+                    "request": returned_request[0].__dict__
+                })
+            else:
+                return jsonify({
+                    "message":"Request doesnt exist"
+                })
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["PUT"])
 def edit_a_request(v1, requestid):
@@ -159,7 +158,7 @@ def edit_a_request(v1, requestid):
 
                     return jsonify({
                         "message":"Successfully edited the request",
-                        "request": json.dumps(a_request.__dict__)
+                        "request": a_request.__dict__
                     })
 
 

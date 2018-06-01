@@ -73,5 +73,5 @@ class UserAuthTest(TestCase):
                 )            
             reply = json.loads(response.data)
 
-            self.assertEquals(reply["message"], "sucessfully logged in")
+            self.assertEquals(reply["message"], "successfully logged in")
             self.assertEquals(response.status_code, 200)
