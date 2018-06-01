@@ -122,15 +122,14 @@ def fetch_a_request(v1, requestid):
         for a_request in all_requests:
             if a_request.request_id == int(requestid):
                 returned_request.append(a_request)
-        print("#----------------------------------------#")
-        print("#----------------------------------------#")
-        print (returned_request)
-        print("#----------------------------------------#")
-        print("#----------------------------------------#")
-        return jsonify({
-            "message":"Successfully fetched the request",
-            "request": returned_request[0].__dict__
-        })
+                return jsonify({
+                    "message": "Successfully fetched the request",
+                    "request": returned_request[0].__dict__
+                })
+            else:
+                return jsonify({
+                    "message":"Request doesnt exist"
+                })
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["PUT"])
 def edit_a_request(v1, requestid):
