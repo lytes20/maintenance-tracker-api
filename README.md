@@ -1,5 +1,6 @@
 # maintenance-tracker-api
 [![Build Status](https://travis-ci.org/lytes20/maintenance-tracker-api.svg?branch=master)](https://travis-ci.org/lytes20/maintenance-tracker-api)
+
 [![Coverage Status](https://coveralls.io/repos/github/lytes20/maintenance-tracker-api/badge.svg)](https://coveralls.io/github/lytes20/maintenance-tracker-api)
 
 ## About
