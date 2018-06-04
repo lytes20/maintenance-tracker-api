@@ -47,7 +47,6 @@ def login(v1):
     return jsonify({"message": "successfully logged in"}), 200
 
 
-
 @app.route("/<v1>/users/requests", methods=["POST"])
 def create_request(v1):
     """ Endpoint to get the request data entered by the user """
@@ -75,13 +74,7 @@ def create_request(v1):
     all_requests.append(new_request)
     # new_number_of_requests = len(all_requests)
 
-    return jsonify({
-        "message":"sucessfully created request",
-        'request_title':new_request.title,
-        "request_description":new_request.description,
-        "requester_name" : new_request.requester_name,
-        "request_id" : new_request.request_id
-        })
+    return jsonify({ "request":new_request.__dict__}), 200
 
 @app.route("/<v1>/users/requests", methods=["GET"])
 def fetch_requests(v1):
@@ -89,19 +82,12 @@ def fetch_requests(v1):
     
     #check if user has any requests
     if len(all_requests) < 1:
-        return jsonify({
-            "message":"You have not made any requests yet"
-        })
+        return jsonify({ "message":"You have not made any requests yet" }), 204
     
     #if user has more than one request
     if len(all_requests) >= 1:
-        return jsonify({
-            "message":"Successfully fetched requests",
-            "requests":[
-                a_request.__dict__ for a_request in all_requests
-            ]
-        })
-    return jsonify({"message":"Can not fetch requests now"})
+        return jsonify({"requests":[a_request.__dict__ for a_request in all_requests]}), 200
+    return jsonify({"message":"Can not fetch requests now"}), 204
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["GET"])
 def fetch_a_request(v1, requestid):
@@ -109,9 +95,7 @@ def fetch_a_request(v1, requestid):
 
     #check if user has any requests
     if len(all_requests) < 1:
-        return jsonify({
-            "message":"You have not made any requests yet"
-        })
+        return jsonify({"message":"You have not made any requests yet"}), 204
     
     #if user has more than one request
     if len(all_requests) >= 1:
@@ -119,14 +103,8 @@ def fetch_a_request(v1, requestid):
         for a_request in all_requests:
             if a_request.request_id == int(requestid):
                 returned_request.append(a_request)
-                return jsonify({
-                    "message": "Successfully fetched the request",
-                    "request": returned_request[0].__dict__
-                })
-            
-            return jsonify({
-                "message":"Request doesnt exist"
-            })
+                return jsonify({ "request": returned_request[0].__dict__ }), 200            
+            return jsonify({ "message":"Request doesnt exist"}), 400
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["PUT"])
 def edit_a_request(v1, requestid):
@@ -134,9 +112,7 @@ def edit_a_request(v1, requestid):
 
     #check if user has any requests
     if len(all_requests) < 1:
-        return jsonify({
-            "message":"You have not made any requests yet"
-        })
+        return jsonify({ "message":"You have not made any requests yet" }), 204
     
     #if user has more than one request
     if len(all_requests) >= 1:
@@ -152,11 +128,8 @@ def edit_a_request(v1, requestid):
                 if a_request.request_id == int(requestid):
                     a_request.title = req_title
                     a_request.description = req_desc
-
-                    return jsonify({
-                        "message":"Successfully edited the request",
-                        "request": a_request.__dict__
-                    })
+                    return jsonify({ "request": a_request.__dict__ })
+                return jsonify({ "message":"Bad request"}), 400
 
 
 
