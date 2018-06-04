@@ -62,12 +62,40 @@ class TestRun(TestCase):
     
     def test_approve_request(self):
         """ Test for endpoint that approves a request """
-        pass
+        with self.client:
+            response = self.client.put(
+                "api/v1/requests/2/approve",
+                content_type='application/json',
+                data=json.dumps(dict(
+                    request_title="Fix Car",
+                    request_description="iphone screen needs fixing",
+                    request_status = "approved"
+                    )))
+        self.assertEqual(response.status_code, 200)
     
     def test_dispprove_request(self):
         """ Test for endpoint that disapproves a request """
-        pass
+        with self.client:
+            response = self.client.put(
+                "api/v1/requests/2/disapprove",
+                content_type='application/json',
+                data=json.dumps(dict(
+                    request_title="Fix Car",
+                    request_description="iphone screen needs fixing",
+                    request_status = None
+                    )))
+        self.assertEqual(response.status_code, 200)
+        
     
     def test_resolve_request(self):
         """ Test for endpoint that resolves a request """
-        pass
+        with self.client:
+            response = self.client.put(
+                "api/v1/requests/2/resolve",
+                content_type='application/json',
+                data=json.dumps(dict(
+                    request_title="Fix Car",
+                    request_description="iphone screen needs fixing",
+                    request_status = "Resolved"
+                    )))
+        self.assertEqual(response.status_code, 200)

@@ -159,4 +159,23 @@ def edit_a_request(v1, requestid):
                     })
 
 
+@app.route("/api/v1/requests", methods=["GET"])
+def fetch_app_requests():
+    """ Endpoint to get all requests on the application """
+    return jsonify({ "requests":[a_request.__dict__ for a_request in all_requests] }), 200
 
+@app.route("/api/v1/requests/<requestid>/approve", methods=["PUT"])
+def approve_request(requestid):
+    """ Endpoint to approve a request """    
+    return jsonify({"message": "Request approved"}), 200
+
+@app.route("/api/v1/requests/<requestid>/disapprove", methods=["PUT"])
+def disapprove_request(requestid):
+    """ Endpoint to disapprove a request """    
+    return jsonify({"message": "Request disapproved"}), 200
+
+
+@app.route("/api/v1/requests/<requestid>/resolve", methods=["PUT"])
+def resolve_request(requestid):
+    """ Endpoint to resolve a request """    
+    return jsonify({"message": "Request resolved"}), 200
