@@ -1,7 +1,7 @@
 from flask_testing import TestCase
 from run import app
 import json
-from models import MaintenanceRequest
+from app.models import MaintenanceRequest
 
 class RequestModelTest(TestCase):
 
