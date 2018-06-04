@@ -12,12 +12,6 @@ from app.models import MaintenanceRequest, User
 all_requests = []
 Users = []
 
-@app.route("/")
-def index():
-    return "<h1>Welcome bitches</h1>"
-#---------------------------------------------------------------------------------------------------------
-# Start of End points for user authentication
-
 @app.route("/<v1>/user/register", methods=["POST"])
 def register(v1):
     """End point to register a new user"""
@@ -52,11 +46,8 @@ def login(v1):
 
     return jsonify({"message": "successfully logged in"}), 200
 
-#End of user authentication end points
-#---------------------------------------------------------------------------------------------------------
 
 
-#Start of the priority end points
 @app.route("/<v1>/users/requests", methods=["POST"])
 def create_request(v1):
     """ Endpoint to get the request data entered by the user """
@@ -132,10 +123,10 @@ def fetch_a_request(v1, requestid):
                     "message": "Successfully fetched the request",
                     "request": returned_request[0].__dict__
                 })
-            else:
-                return jsonify({
-                    "message":"Request doesnt exist"
-                })
+            
+            return jsonify({
+                "message":"Request doesnt exist"
+            })
 
 @app.route("/<v1>/users/requests/<requestid>", methods=["PUT"])
 def edit_a_request(v1, requestid):
@@ -168,7 +159,4 @@ def edit_a_request(v1, requestid):
                     })
 
 
-        
 
-if __name__ == "__main__":
-    app.run(debug = True)
