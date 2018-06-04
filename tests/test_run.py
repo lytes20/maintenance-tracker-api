@@ -10,7 +10,7 @@ class TestRun(TestCase):
     def create_app(self):
         return app
 
-    def test_create_request(self): #req_title, req_desc, requester_name, req_id
+    def test_create_request(self):
         with self.client:
             response = self.client.post("/1/users/requests", content_type='application/json',
                                         data=json.dumps(dict(
@@ -49,3 +49,20 @@ class TestRun(TestCase):
         reply = json.loads(response.data)
         self.assertEquals(reply["message"], "Successfully edited the request")
         self.assertEquals(response.status_code, 200)
+
+    def test_fetch_app_requests(self):
+        """ Test for endpoint that fetches all requests on the application"""
+        with self.client:
+            response = self.client.get("api/v1/requests")
+            reply = json.loads(response.data.decode())
+            self.assertEquals(response.status_code, 200)
+        pass
+    
+    def test_approve_request(self):
+        pass
+    
+    def test_dispprove_request(self):
+        pass
+    
+    def test_resolve_request(self):
+        pass
