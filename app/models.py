@@ -1,7 +1,7 @@
 """ Models script"""
 class User:
     def __init__(self, name, email, password):
-        self.username = name
+        self.name = name
         self.email= email
         self.password = password
 
