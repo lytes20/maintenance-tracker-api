@@ -15,10 +15,10 @@ The API for a maintenance tracker application allows users and admins to have th
 - Register a user
 - Login a user
 ## Tools Used
-[Flask](http://flask.pocoo.org/) - web microframework for Python
-[Virtual environment](https://virtualenv.pypa.io/en/stable/) - tool used to create isolated python environments
-[pip](https://pip.pypa.io/en/stable/) - tool used used to install python messages
-[git](https://git-scm.com/) - free open source distributed version control system
+- [Flask](http://flask.pocoo.org/) - web microframework for Python
+- [Virtual environment](https://virtualenv.pypa.io/en/stable/) - tool used to create isolated python environments
+- [pip](https://pip.pypa.io/en/stable/) - tool used used to install python messages
+- [git](https://git-scm.com/) - free open source distributed version control system
 ## Requirements
 [Python](https://www.python.org/) 3.x.x+
 ## Run (Use) on your local machine
