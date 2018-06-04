@@ -4,7 +4,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/017a6ef86505f7dc755a/maintainability)](https://codeclimate.com/github/lytes20/maintenance-tracker-api/maintainability)
 
 ## About
-This is an API for a maintenance tracker application that allows users to make maintenance or repair requests and monitor them
+Maintenance Tracker App is an application that provides users with the ability to reach out to operations or repairs department regarding repair or maintenance requests and monitor the status of their request.
+
+The API for a maintenance tracker application allows users and admins to have the mentioned functionality above
 ## Features
 - Get all the requests for a logged in user
 - Get a request for a logged in user
@@ -14,8 +16,11 @@ This is an API for a maintenance tracker application that allows users to make m
 - Login a user
 ## Tools Used
 [Flask](http://flask.pocoo.org/) - web microframework for Python
+[Virtual environment](https://virtualenv.pypa.io/en/stable/) - tool used to create isolated python environments
+[pip](https://pip.pypa.io/en/stable/) - tool used used to install python messages
+[git](https://git-scm.com/) - free open source distributed version control system
 ## Requirements
-Python 3.x.x+
+[Python](https://www.python.org/) 3.x.x+
 ## Run (Use) on your local machine
 First clone the repository
 ```sh
@@ -39,7 +44,6 @@ POST | v1/user/login | True | Login a user
 HTTP Method|End point | Public Access|Action
 -----------|----------|--------------|------
 POST | v1/users/requests | True | Create a request
-GET | v1/users/requests | False | Fetch requests for a logged in user
 GET | v1/users/requests | False | Fetch requests for a logged in user
 GET | v1/users/requests/requestid | False | Fetch a request for a logged in user
 PUT | v1/users/requests/requestid | False | Update a request for a logged in user
